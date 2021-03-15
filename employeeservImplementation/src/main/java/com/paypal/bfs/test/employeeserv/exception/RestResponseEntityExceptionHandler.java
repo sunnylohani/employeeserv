@@ -21,9 +21,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
-        String errorMessage = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        String errorMessage = "Request body has validation errors";
         List<String> validationList = ex.getBindingResult().getFieldErrors().stream()
-                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .map(fieldError -> fieldError.getField() + " " + fieldError.getDefaultMessage())
                 .collect(Collectors.toList());
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setMessage(errorMessage);
