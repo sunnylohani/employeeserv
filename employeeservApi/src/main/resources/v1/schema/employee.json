@@ -1,0 +1,70 @@
+{
+  "title": "Employee resource",
+  "description": "Employee resource object",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "employee id",
+      "type": "integer"
+    },
+    "first_name": {
+      "description": "first name",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "last_name": {
+      "description": "last name",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "date_of_birth": {
+      "description": "date of birth",
+      "javaType" : "java.time.LocalDate",
+      "type" : "object"
+    },
+    "address" : {
+      "description": "address",
+      "type": "object",
+      "properties": {
+        "line1": {
+          "description": "address line 1",
+          "type": "string"
+        },
+        "line2": {
+          "description": "address line 1",
+          "type": "string"
+        },
+        "city": {
+          "description": "address city",
+          "type": "string"
+        },
+        "state": {
+          "description": "address state",
+          "type": "string"
+        },
+        "country": {
+          "description": "address country",
+          "type": "string"
+        },
+        "zip_code": {
+          "description": "address zip code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "line1",
+        "city",
+        "state",
+        "country",
+        "zip_code"
+      ]
+    }
+  },
+  "required": [
+    "first_name",
+    "last_name",
+    "date_of_birth"
+  ]
+}
