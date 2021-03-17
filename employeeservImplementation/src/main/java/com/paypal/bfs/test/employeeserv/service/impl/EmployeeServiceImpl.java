@@ -41,6 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return employee;
         }
 
+        log.error("Invalid employee resource id {}", id);
         throw new EmployeeServiceException("Invalid employee resource id");
     }
 

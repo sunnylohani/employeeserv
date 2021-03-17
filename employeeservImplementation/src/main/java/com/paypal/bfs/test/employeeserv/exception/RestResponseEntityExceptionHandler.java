@@ -1,12 +1,12 @@
 package com.paypal.bfs.test.employeeserv.exception;
 
 import com.paypal.bfs.test.employeeserv.model.ErrorResponse;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -29,5 +29,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         errorResponse.setMessage(errorMessage);
         errorResponse.setErrorList(validationList);
         return new ResponseEntity<>(errorResponse, status);
+    }
+
+    @ExceptionHandler(EmployeeServiceException.class)
+    protected ResponseEntity<ErrorResponse> handleEmployeeServiceException(RuntimeException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), null);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }
